@@ -1,0 +1,7 @@
+rubpy==7.0.6
+httpx
+sqlalchemy
+TranslatorX
+googlesearch-python
+persiantools
+aiofiles
