@@ -624,4 +624,4 @@ async def remove_guid_after_delay(guid: str):
     recent_guids.discard(guid)
 
 # اجرا
-client.run(init_db()
+client.run(init_db())
