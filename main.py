@@ -533,8 +533,8 @@ async def new_message(update: Update):
     elif update.text:
         await update.edit("⚠️ دستور ناشناخته. از /help برای مشاهده دستورات استفاده کنید.")
 
-# هندلر سلام
-@client.on_message_updates(filters.regex('^سلام'))
+# هندلر سلام و..
+@client.on_message_updates(filters.regex('(?i)^سلام$'))
 async def handle_hello(update: Update):
     guid = update.object_guid
     if guid in recent_guids:
@@ -542,40 +542,86 @@ async def handle_hello(update: Update):
     recent_guids.add(guid)
     asyncio.create_task(remove_guid_after_delay(guid))
     message = None
-    for _ in range(30):
-        emoji = random.choice(["🩷", "❤️", "🧡", "💛", "💚", "🩵", "💙", "💜"])
+    for _ in range(40):
+        emoji = random.choice(["👨🏻‍💻", "😍", "🥹", "🥷🏻", "🦹🏻‍♂️", "🦸🏻‍♂️", "👨🏻‍🎤", "👻", "🥶", "🦄", "🫧", "❤️‍🔥", "🦠", "💋", "🍻", "🐉"])
+        text = f'سلام {emoji}'
         if update.is_me:
-            await update.edit(f'سلام {emoji}')
+            await update.edit(text)
         elif message is None:
-            message = await update.reply(f'سلام {emoji}')
+            message = await update.reply(text)
             message.client = client
         else:
-            await message.edit(f'سلام {emoji}')
+            await message.edit(text)
         await asyncio.sleep(0.5)
-   
-@client.on_message_updates(filters.regex('^جق'))
-async def handle_hello(update: Update):
+
+
+@client.on_message_updates(filters.regex('(?i)^خوبی$'))
+async def handle_khoobi(update: Update):
     guid = update.object_guid
     if guid in recent_guids:
         return
     recent_guids.add(guid)
     asyncio.create_task(remove_guid_after_delay(guid))
-
-    emojis = ["⅁====✊🏻", "⅁===✊🏻=", "⅁==✊🏻==", "⅁=✊🏻===", "⅁✊🏻====", "💨⅁==✊🏻==", "💦⅁=====", "🤲🏻💦⅁====="]  
-    message = None  
-
-    for emoji in emojis:  
-        if update.is_me:  
-            await update.edit(f'جق {emoji}')  
-        elif message is None:  
-            message = await update.reply(f'جق {emoji}')  
-        else:  
-            await message.edit(f'جق {emoji}')  
+    message = None
+    for _ in range(40):
+        emoji = random.choice(["❤️", "💖", "💕", "💘", "💞", "💓", "🌸", "🥰", "😍", "🩷"])
+        text = f'خوبم عزیزم {emoji}'
+        if update.is_me:
+            await update.edit(text)
+        elif message is None:
+            message = await update.reply(text)
+            message.client = client
+        else:
+            await message.edit(text)
         await asyncio.sleep(0.5)
+
+
+@client.on_message_updates(filters.regex('(?i)^چخبر$'))
+async def handle_chikhabar(update: Update):
+    guid = update.object_guid
+    if guid in recent_guids:
+        return
+    recent_guids.add(guid)
+    asyncio.create_task(remove_guid_after_delay(guid))
+    message = None
+    for _ in range(40):
+        emoji = random.choice(["🎉", "🗞️", "📣", "📢", "🤔", "💬", "🧠", "📡", "👀", "🧾"])
+        text = f'همه چی آرومه {emoji}'
+        if update.is_me:
+            await update.edit(text)
+        elif message is None:
+            message = await update.reply(text)
+            message.client = client
+        else:
+            await message.edit(text)
+        await asyncio.sleep(0.5)
+
+
+@client.on_message_updates(filters.regex('(?i)^سلام خوبی'))
+async def handle_salam_khoobi(update: Update):
+    guid = update.object_guid
+    if guid in recent_guids:
+        return
+    recent_guids.add(guid)
+    asyncio.create_task(remove_guid_after_delay(guid))
+    message = None
+    for _ in range(40):
+        emoji = random.choice(["💖", "👨🏻‍💻", "🥰", "🦄", "🩷", "🫧", "💘", "😍", "👻", "❤️"])
+        text = f'سلام خوبی؟ {emoji}'
+        if update.is_me:
+            await update.edit(text)
+        elif message is None:
+            message = await update.reply(text)
+            message.client = client
+        else:
+            await message.edit(text)
+        await asyncio.sleep(0.5)
+  
+
 
 async def remove_guid_after_delay(guid: str):
     await asyncio.sleep(SPAM_TIMEOUT)
     recent_guids.discard(guid)
 
 # اجرا
-client.run(init_db())
+client.run(init_db()
