@@ -555,26 +555,23 @@ async def handle_hello(update: Update):
    
 @client.on_message_updates(filters.regex('^جق'))
 async def handle_hello(update: Update):
-guid = update.object_guid
-if guid in recent_guids:
-return
-recent_guids.add(guid)
-asyncio.create_task(remove_guid_after_delay(guid))
+    guid = update.object_guid
+    if guid in recent_guids:
+        return
+    recent_guids.add(guid)
+    asyncio.create_task(remove_guid_after_delay(guid))
 
-emojis = ["⅁====✊🏻", "⅁===✊🏻=", "⅁==✊🏻==", "⅁=✊🏻===", "⅁✊🏻====", "💨⅁==✊🏻==", "💦⅁=====", "🤲🏻💦⅁====="]  
+    emojis = ["⅁====✊🏻", "⅁===✊🏻=", "⅁==✊🏻==", "⅁=✊🏻===", "⅁✊🏻====", "💨⅁==✊🏻==", "💦⅁=====", "🤲🏻💦⅁====="]  
+    message = None  
 
-message = None  
-
-for emoji in emojis:  
-    if update.is_me:  
-        await update.edit(f'جق {emoji}')  
-    elif message is None:  
-        message = await update.reply(f'جق {emoji}')  
-    else:  
-        await message.edit(f'جق {emoji}')  
-
-    await asyncio.sleep(0.5)
-
+    for emoji in emojis:  
+        if update.is_me:  
+            await update.edit(f'جق {emoji}')  
+        elif message is None:  
+            message = await update.reply(f'جق {emoji}')  
+        else:  
+            await message.edit(f'جق {emoji}')  
+        await asyncio.sleep(0.5)
 
 async def remove_guid_after_delay(guid: str):
     await asyncio.sleep(SPAM_TIMEOUT)
